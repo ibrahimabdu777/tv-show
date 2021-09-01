@@ -2,13 +2,14 @@ import { ChangeEventHandler } from "react";
 import { IEpisode } from "./Episode";
 
 interface SelectBarProps {
-    select: string;
-    handleSelectChange: ChangeEventHandler;
-    data: IEpisode[];
+  select: string;
+  handleSelectChange: ChangeEventHandler;
+  data: IEpisode[];
 }
 export default function SelectBar({
   select,
-  handleSelectChange,data
+  handleSelectChange,
+  data,
 }: SelectBarProps): JSX.Element {
   return (
     <>

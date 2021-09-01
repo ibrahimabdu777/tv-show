@@ -1,4 +1,3 @@
-
 interface SearchBarProps {
   handleSearchBarChange: React.ChangeEventHandler<HTMLInputElement>;
   search: string;

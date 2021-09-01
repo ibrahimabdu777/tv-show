@@ -1,8 +1,8 @@
-interface IEpisode {
-  key: number;
+export interface IEpisode {
+  key?: number;
   id?: number;
   url?: string;
-  name?: string;
+  name: string;
   season?: number;
   number?: number;
   type?: string;
@@ -14,7 +14,7 @@ interface IEpisode {
     medium?: string;
     original?: string;
   };
-  summary?: string;
+  summary: string;
   _links?: { self: { href: string } };
 }
 

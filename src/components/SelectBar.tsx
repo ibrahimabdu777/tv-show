@@ -1,19 +1,20 @@
 import { ChangeEventHandler } from "react";
-import episodes from "../episodes.json";
+import { IEpisode } from "./Episode";
 
-interface SelectBar {
+interface SelectBarProps {
     select: string;
-    handleSelectChange: ChangeEventHandler
+    handleSelectChange: ChangeEventHandler;
+    data: IEpisode[];
 }
 export default function SelectBar({
   select,
-  handleSelectChange,
-}: SelectBar): JSX.Element {
+  handleSelectChange,data
+}: SelectBarProps): JSX.Element {
   return (
     <>
       <select value={select} onChange={handleSelectChange}>
         <option value="default">Please select an episode</option>
-        {episodes.map((episode, idx) => (
+        {data.map((episode, idx) => (
           <option value={episode.name} key={idx}>
             {idx + 1} {episode.name}
           </option>

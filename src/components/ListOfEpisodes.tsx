@@ -1,19 +1,22 @@
-import episodes from "../episodes.json";
-import Episode from "./Episode";
+import Episode, { IEpisode } from "./Episode";
+
 
 interface EpisodeList {
   search: string;
-  select: any;
-  handleResetButtonClick: any,
+  select: string;
+  handleResetButtonClick: React.MouseEventHandler<HTMLButtonElement>,
+  data: IEpisode[]
 }
-export default function ListOfEpisodes({ search, select, handleResetButtonClick }: EpisodeList): JSX.Element {
-  const searchItems = episodes.filter(
+export default function ListOfEpisodes({ search, select, handleResetButtonClick, data }: EpisodeList): JSX.Element {
+
+
+  const searchItems = data.filter(
     (episode) =>
       episode.name.toLowerCase().includes(search.toLowerCase()) ||
       episode.summary.toLowerCase().includes(search.toLowerCase())
   );
 
-  const selectedItem = episodes.filter(episode => episode.name === select)
+  const selectedItem = data.filter(episode => episode.name === select)
 
   return (
     <>
@@ -31,7 +34,7 @@ export default function ListOfEpisodes({ search, select, handleResetButtonClick 
         />
       ))}
       
-      <p>there are {searchItems.length} episodes matching your search</p>
+      <p>there are {searchItems.length}/73 episodes matching your search</p>
       {(select === 'default' ) && searchItems.map((episode) => (
         <Episode
           name={episode.name}

@@ -38,7 +38,10 @@ export default function ListOfEpisodes({
         />
       ))}
 
-      <p>there are {searchItems.length}/73 episodes matching your search</p>
+      <p>
+        there are {searchItems.length}/{data.length} episodes matching your
+        search
+      </p>
       {select === "default" &&
         searchItems.map((episode) => (
           <Episode

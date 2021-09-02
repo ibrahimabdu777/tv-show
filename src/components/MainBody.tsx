@@ -1,9 +1,10 @@
 import ListOfEpisodes from "./ListOfEpisodes";
 import SearchBar from "./SearchBar";
-import { useState, ChangeEvent, useEffect } from "react";
+import React, { useState, ChangeEvent, useEffect } from "react";
 import SelectBar from "./SelectBar";
 import { IEpisode } from "./Episode";
 import ShowSelector from "./ShowSelector";
+import ShowsListing from "./ShowsListing";
 
 export default function MainBody(): JSX.Element {
   const [search, setSearch] = useState("");
@@ -27,6 +28,13 @@ export default function MainBody(): JSX.Element {
     setSearch("");
     setSelect("default");
   }
+  function handleShowClick(e: React.MouseEvent<HTMLHeadingElement>) {
+    console.log(e.currentTarget.id);
+    setSelectedShow(e.currentTarget.id);
+  }
+  function handleButtonAllShowsClick(e: React.MouseEvent<HTMLButtonElement>) {
+    setSelectedShow("default");
+  }
   useEffect(() => {
     const getData = async () => {
       const response = await fetch(
@@ -41,21 +49,30 @@ export default function MainBody(): JSX.Element {
 
   return (
     <>
-      <ShowSelector
-        selectedShow={selectedShow}
-        handleShowSelected={handleShowSelected}
-      />
-      <SelectBar
-        select={select}
-        handleSelectChange={handleSelectChange}
-        data={data}
-        selectedShow={selectedShow}
-      />
-      <SearchBar
-        handleSearchBarChange={handleSearchBarChange}
-        search={search}
-        selectedShow={selectedShow}
-      />
+      {selectedShow === "default" && (
+        <ShowsListing handleShowClick={handleShowClick} />
+      )}
+      {selectedShow !== "default" && (
+        <ShowSelector
+          selectedShow={selectedShow}
+          handleShowSelected={handleShowSelected}
+        />
+      )}
+      {selectedShow !== "default" && (
+        <SelectBar
+          select={select}
+          handleSelectChange={handleSelectChange}
+          data={data}
+          selectedShow={selectedShow}
+        />
+      )}
+      {selectedShow !== "default" && (
+        <SearchBar
+          handleSearchBarChange={handleSearchBarChange}
+          search={search}
+          selectedShow={selectedShow}
+        />
+      )}
 
       {selectedShow !== "default" && (
         <ListOfEpisodes
@@ -63,6 +80,7 @@ export default function MainBody(): JSX.Element {
           select={select}
           handleResetButtonClick={handleResetButtonClick}
           data={data}
+          handleButtonAllShowsClick={handleButtonAllShowsClick}
         />
       )}
     </>

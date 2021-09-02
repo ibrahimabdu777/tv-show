@@ -1,3 +1,4 @@
+import React from "react";
 import Episode, { IEpisode } from "./Episode";
 
 interface EpisodeList {
@@ -5,11 +6,13 @@ interface EpisodeList {
   select: string;
   handleResetButtonClick: React.MouseEventHandler<HTMLButtonElement>;
   data: IEpisode[];
+  handleButtonAllShowsClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 export default function ListOfEpisodes({
   search,
   select,
   handleResetButtonClick,
+  handleButtonAllShowsClick,
   data,
 }: EpisodeList): JSX.Element {
   const searchItems = data.filter(
@@ -22,6 +25,7 @@ export default function ListOfEpisodes({
 
   return (
     <>
+      <button onClick={handleButtonAllShowsClick}>Back to all TV shows</button>
       {/* //episodes.map((episode )=> (episode.name.toLowerCase().includes(search.toLowerCase()) || episode.summary.toLowerCase().includes(search.toLowerCase())) && <Episode name={episode.name} key={episode.id} season={episode.season} number={episode.number} image={episode.image} summary={episode.summary}/>)} */}
       {select !== "default" && (
         <button onClick={handleResetButtonClick}> Show all episodes</button>
